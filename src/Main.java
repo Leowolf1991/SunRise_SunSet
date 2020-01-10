@@ -87,4 +87,10 @@ public class Main {
         RA += LQuadrant - RQuadrant;
         return RA / 15.0D;
     }
+
+    public double LocalAngle(double zenit, double latitude, double dSinDecrise, double dCosDicrise)
+    {
+        double cosH = (Math.cos(DegToRoad(zenit)) - dSinDecrise * Math.sin(DegToRoad(latitude)))/(dCosDicrise * Math.cos(DegToRoad(latitude)));
+        return  cosH;
+    }
 }
