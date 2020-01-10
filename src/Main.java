@@ -40,7 +40,7 @@ public class Main {
         main.dCosset = Math.cos(Math.asin(main.dSinset));
     }
 
-    public int DayofYear() {
+    private int DayofYear() {
         Calendar calendar = Calendar.getInstance();
         double dN1 = Math.floor((double)(275 * (calendar.get(Calendar.MONTH) + 1) / 9));
         double dN2 = Math.floor((double)((calendar.get(Calendar.MONTH) + 10) / 12));
@@ -49,23 +49,23 @@ public class Main {
         return this.iN;
     }
 
-    public double LongtiToHour() {
+    private double LongtiToHour() {
         Coordinate coordinate = new Coordinate(53.55D, 34.23D);
         this.dLngHour = coordinate.getLongtitude() / 15.0D;
         return this.dLngHour;
     }
 
-    public void TimeSun(double dLngHour, int iN) {
+    private void TimeSun(double dLngHour, int iN) {
         this.dSunRise = (double)iN + (6.0D - dLngHour) / 24.0D;
         this.dSunSet = (double)iN + (18.0D - dLngHour) / 24.0D;
     }
 
-    public double SunAnomaly(double dTimeSun) {
+    private double SunAnomaly(double dTimeSun) {
         double dAnomaly = 0.9856D * dTimeSun - 3.289D;
         return dAnomaly;
     }
 
-    public double TrueLongtitude(double dAnomaly) {
+    private double TrueLongtitude(double dAnomaly) {
         double L = dAnomaly + 1.916D * Math.sin(this.DegToRoad(dAnomaly)) + 0.02D * Math.sin(this.DegToRoad(2.0D * dAnomaly)) + 282.634D;
         if (L >= 360.0D) {
             L -= 360.0D;
@@ -76,11 +76,11 @@ public class Main {
         return L;
     }
 
-    public double DegToRoad(double dValue) {
+    private double DegToRoad(double dValue) {
         return 3.141592653589793D * dValue / 180.0D;
     }
 
-    public double RightAcsension(double L) {
+    private double RightAcsension(double L) {
         double RA = 180.0D * Math.atan(0.91764D * Math.tan(L * 3.141592653589793D / 180.0D)) / 3.141592653589793D;
         double LQuadrant = 90.0D * Math.floor(L / 90.0D);
         double RQuadrant = 90.0D * Math.floor(RA / 90.0D);
@@ -88,7 +88,7 @@ public class Main {
         return RA / 15.0D;
     }
 
-    public double LocalAngle(double zenit, double latitude, double dSinDecrise, double dCosDicrise)
+    private double LocalAngles(double zenit, double latitude, double dSinDecrise, double dCosDicrise)
     {
         double cosH = (Math.cos(DegToRoad(zenit)) - dSinDecrise * Math.sin(DegToRoad(latitude)))/(dCosDicrise * Math.cos(DegToRoad(latitude)));
         return  cosH;
