@@ -93,7 +93,7 @@ public class Main {
 
     private double TrueL(double M)
     {
-        var L = M + (1.916*Math.sin(DegToRad(M)))+(0.020*Math.sin(DegToRad(2*M))) + 282.634;
+        double L = M + (1.916*Math.sin(DegToRad(M)))+(0.020*Math.sin(DegToRad(2*M))) + 282.634;
         if (L >= 360)
             L -= 360;
         else if (L < 0)
@@ -103,22 +103,22 @@ public class Main {
 
     private double RightAscension(double L)
     {
-        var RA = 180 *Math.atan(0.91764*Math.tan(L*Math.PI/180)) / Math.PI;
-        var LQuadrant = 90*Math.floor(L/90);
-        var RQuadrant = 90*Math.floor(RA/90);
+        double RA = 180 *Math.atan(0.91764*Math.tan(L*Math.PI/180)) / Math.PI;
+        double LQuadrant = 90*Math.floor(L/90);
+        double RQuadrant = 90*Math.floor(RA/90);
         RA = RA + (LQuadrant - RQuadrant);
         return RA/15;
     }
 
     private double LocalAngle(double zenith, double latitude, double sinDec, double cosDec)
     {
-        var cosH = (Math.cos(DegToRad(zenith))-sinDec*Math.sin(DegToRad(latitude)))/(cosDec*Math.cos(DegToRad(latitude)));
+        double cosH = (Math.cos(DegToRad(zenith))-sinDec*Math.sin(DegToRad(latitude)))/(cosDec*Math.cos(DegToRad(latitude)));
         return cosH;
     }
 
     private double ToUT(double T,double lngHour)
     {
-        var UT = T - lngHour;
+        double UT = T - lngHour;
         if (UT < 0)
             UT += 24;
         else if (UT >= 24)
